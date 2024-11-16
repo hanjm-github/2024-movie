@@ -22,48 +22,28 @@
     <nav class="navbar navbar-expand-md fixed-top" style="background: var(--bs-secondary-color);color: var(--bs-tertiary-bg);padding-bottom: 0px;">
         <div class="container-fluid"><a class="navbar-brand" data-bss-hover-animate="pulse" href="#" style="font-size: 60px;font-family: 'Akaya Kanadaka', serif;color: #ffffff;"><img src="{{ url_for('static', filename='assets/img/clipboard-image-2.png') }}" width="74" height="81">DLF ahena</a>
             <nav class="navbar py-3" style="background: #00000000;color: var(--bs-navbar-color);position: relative;">
-                <div class="container"><a class="navbar-brand d-flex align-items-center" href="#"></a>
-                    <div class="collapse navbar-collapse flex-grow-0 order-md-first" id="navcol-6">
-                        <ul class="navbar-nav me-auto">
-                            <li class="nav-item"></li>
-                            <li class="nav-item"></li>
-                        </ul>
-                        <div class="d-md-none my-2"><button class="btn btn-light me-2" type="button">Button</button><button class="btn btn-primary" type="button">Button</button></div>
-                    </div>
-                    <div class="d-none d-md-block"></div><button class="btn btn-primary" type="button" style="text-align: left;margin: 0px;--bs-body-font-size: 0rem;"><a type="button" style="text-align: left;margin: 0px;--bs-body-font-size: 0rem;color: var(--bs-tertiary-bg);" href="#b">Ranking</a></button><button class="btn btn-primary" type="button" style="text-align: center;margin: 0px;--bs-body-font-size: 0rem;width: 74.9625px;"><a type="button" style="text-align: left;margin: 0px;--bs-body-font-size: 0rem;color: var(--bs-tertiary-bg);" href="#c">VS</a></button><button class="btn btn-primary" type="button"><a type="button" style="text-align: left;margin: 0px;--bs-body-font-size: 0rem;color: var(--bs-tertiary-bg);" href="#d">History</a></button>
+                <div class="container">
+                    <div class="d-none d-md-block"></div><button class="btn btn-primary" type="button" style="text-align: left;margin: 0px;--bs-body-font-size: 0rem;"><a type="button" style="text-align: left;margin: 0px;--bs-body-font-size: 0rem;color: var(--bs-tertiary-bg);" href="#b">Ranking</a></button><button class="btn btn-primary" type="button" style="text-align: center;margin: 0px;--bs-body-font-size: 0rem;width: 74.9625px;"><a type="button" style="text-align: left;margin: 0px;--bs-body-font-size: 0rem;color: var(--bs-tertiary-bg);" href="#c">VS</a></button>
                 </div>
             </nav>
         </div>
     </nav>
-    <section class="text-center bg-light features-icons" style="/*text-align: center;*/">
+    <section class="text-center bg-light features-icons">
         <h1 class="text-start" data-bss-hover-animate="pulse" id="a" style="color: var(--bs-emphasis-color);background: var(--bs-secondary-bg-subtle);border-style: solid;border-color: var(--bs-emphasis-color);">&nbsp; &nbsp; 최신 영화</h1>
         <div class="simple-slider">
             <div class="swiper-container">
                 <div class="swiper-wrapper">
-                    <div class="swiper-slide" style="background: url(&quot;https://cdn.bootstrapstudio.io/placeholders/1400x800.png&quot;) center center / cover no-repeat;">
-                        <hr>
-                    </div>
-                    <div class="swiper-slide" style="background: url(&quot;https://cdn.bootstrapstudio.io/placeholders/1400x800.png&quot;) center center / cover no-repeat;"></div>
-                    <div class="swiper-slide" style="background: url(&quot;https://cdn.bootstrapstudio.io/placeholders/1400x800.png&quot;) center center / cover no-repeat;"></div>
+                    {% for url in adlink_list %}
+                    <div class="swiper-slide" style="background: url(&quot;{{url.imgURL}}&quot;) center center / cover no-repeat;"></div>
+                    {% endfor %}
                 </div>
-                <div class="swiper-pagination"></div>
-                <div class="swiper-button-prev"></div>
-                <div class="swiper-button-next"></div>
-            </div>
-        </div>
-        <div class="swiper-slide" style="background: url(&quot;https://cdn.bootstrapstudio.io/placeholders/1400x800.png&quot;) center center / cover no-repeat;"></div>
-        <div class="swiper-slide" style="background: url(&quot;https://cdn.bootstrapstudio.io/placeholders/1400x800.png&quot;) center center / cover no-repeat;"></div>
-        <div class="swiper-slide" style="background: url(&quot;https://cdn.bootstrapstudio.io/placeholders/1400x800.png&quot;) center center / cover no-repeat;"></div>
-        <div class="simple-slider">
-            <div class="swiper-container">
-                <div class="swiper-wrapper"></div>
                 <div class="swiper-pagination"></div>
                 <div class="swiper-button-prev"></div>
                 <div class="swiper-button-next"></div>
             </div>
         </div>
         <hr>
-        <h1 class="display-4 text-start" data-bss-hover-animate="pulse" id="b" style="color: var(--bs-emphasis-color);background: var(--bs-secondary-bg-subtle);border-style: solid;border-color: var(--bs-emphasis-color);font-family: 'Akaya Kanadaka', serif;">&nbsp; &nbsp; Movie Ranking by KOFIC</h1>
+        <h1 class="display-4 text-start" data-bss-hover-animate="pulse" id="b" style="color: var(--bs-emphasis-color);background: var(--bs-secondary-bg-subtle);border-style: solid;border-color: var(--bs-emphasis-color);font-family: 'Akaya Kanadaka', serif;">&nbsp; &nbsp; 일간 박스 오피스</h1>
         {% for chunk in chunked_movies %}
         <div class="card-group" style="font-family: 'Black Han Sans', sans-serif;font-size: 35px;">
             {% for movie in chunk %}
@@ -77,26 +57,37 @@
             {% endfor %}
         </div>
         {% endfor %}
-        <section class="text-center bg-light features-icons" style="/*text-align: center;*/">
-            <h1 class="text-start" data-bss-hover-animate="pulse" id="c" style="font-size: 42.88px;font-family: Lato, sans-serif;border-style: solid;">&nbsp; &nbsp; &nbsp;아이언맨 VS 캡틴 아메리카 투표 그래프</h1><img src="{{ url_for('static', filename='assets/img/clipboard-image-3.png') }}" width="224" height="159" style="width: 224px;">
-            <hr><button class="btn btn-primary" type="button" style="width: 400px;font-size: 22px;color: rgb(0,0,0);background: rgb(255,107,107);font-weight: bold;">아이언맨</button><button class="btn btn-primary" type="button" style="width: 400px;font-size: 22px;color: rgb(0,0,0);background: rgb(78,95,255);font-weight: bold;">캡틴 아메리카</button>
-            <div class="btn-group" role="group"></div>
+        <section class="text-center bg-light features-icons">
+            <h1 class="text-start" data-bss-hover-animate="pulse" id="c" style="font-size: 42.88px;font-family: Lato, sans-serif;border-style: solid;">&nbsp; &nbsp; &nbsp;아이언맨 VS 캡틴 아메리카</h1><img src="{{ url_for('static', filename='assets/img/clipboard-image-3.png') }}" width="224" height="159" style="width: 224px;">
+            <hr>
+            <button class="btn btn-primary" onclick="sendPostRequestOne()" style="width: 400px;font-size: 22px;color: rgb(0,0,0);background: rgb(255,107,107);font-weight: bold;">아이언맨 {{ironman}}표</button>
+            <button class="btn btn-primary" onclick="sendPostRequestTwo()" style="width: 400px;font-size: 22px;color: rgb(255,255,255);background: rgb(78,95,255);font-weight: bold;">캡틴 아메리카 {{cap}}표</button>
         </section>
-    </section>
-    <section class="showcase">
-        <div class="container-fluid p-0">
-            <div class="row g-0">
-                <div class="col-md-12 col-lg-12 my-auto order-lg-1 showcase-text">
-                    <h1 class="display-4 text-center border rounded-pill border-1 border-primary shadow-lg" data-bss-hover-animate="pulse" id="d" style="width: 1246.2px;font-family: 'Akaya Kanadaka', serif;font-weight: bold;color: var(--bs-border-color);border-style: solid;border-color: var(--bs-body-color);background: var(--bs-warning-text-emphasis);"><img src="{{ url_for('static', filename='assets/img/clipboard-image-4.png') }}" width="73" height="76" style="width: 70px;height: 70px;">영화의 역사</h1>
-                    <p><br><span style="color: rgb(0, 0, 0);">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sed felis leo. Nullam id odio ut felis ultrices mattis ac vitae felis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur a efficitur ipsum. Aliquam sit amet malesuada purus. Fusce et magna et magna suscipit porta non a erat. Praesent nisi odio, dictum nec vulputate non, pellentesque eleifend nulla. Mauris rutrum finibus nunc eu aliquam.Vestibulum ut ex quis velit euismod porta at id arcu. Morbi quam leo, auctor ut pulvinar id, maximus vitae nunc. Cras id tincidunt nisl. Donec massa orci, tristique vel mi sit amet, molestie rutrum nulla. Proin congue metus ullamcorper, consectetur ex consequat, posuere nulla. Vestibulum sollicitudin neque quis purus elementum, rhoncus finibus arcu efficitur. Proin pretium, diam vel vestibulum viverra, libero diam tempor leo, sit amet rutrum ipsum augue nec magna. Maecenas blandit ullamcorper massa, vitae feugiat lorem ultrices at. Aenean iaculis consectetur euismod. Etiam suscipit, libero vulputate commodo blandit, erat dolor lobortis orci, in luctus mauris velit et ante. Curabitur faucibus metus ut euismod tempus.</span><br><br><br></p>
-                </div>
-            </div>
-        </div>
     </section>
     <script src="{{ url_for('static', filename='assets/bootstrap/js/bootstrap.min.js') }}"></script>
     <script src="{{ url_for('static', filename='assets/js/bs-init.js') }}"></script>
     <script src="{{ url_for('static', filename='assets/js/Simple-Slider-swiper-bundle.min.js') }}"></script>
     <script src="{{ url_for('static', filename='assets/js/Simple-Slider.js') }}"></script>
+    <script>
+        function sendPostRequestOne() {
+            fetch('/vote', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ value: 'choice_1' }),
+            })
+        }
+        function sendPostRequestTwo() {
+            fetch('/vote', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ value: 'choice_2' }),
+            })
+        }
+    </script>
 </body>
 
 </html>

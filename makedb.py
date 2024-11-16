@@ -60,6 +60,11 @@ class Movie(Base):
     movieCd = Column(Integer)
     imgURL = Column(String(255))
 
+class adlinks(Base):
+    __tablename__ = 'adlinks'
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    imgURL = Column(String(255))
+
 # 기존 테이블 삭제 및 새로 생성
 Base.metadata.drop_all(engine)
 Base.metadata.create_all(engine)
@@ -102,6 +107,19 @@ for movie in movies:
 for movie in movie_list:
     new_movie = Movie(rank=movie['rank'], movieNm=movie['movieNm'], openDt=movie['openDt'], audiAcc=movie['audiAcc'], movieCd=movie['movieCd'], imgURL=movie['imgURL'])
     session.add(new_movie)
+
+url = "https://www.lottecinema.co.kr/"
+driver.get(url)
+
+element = WebDriverWait(driver, 10).until(
+    EC.presence_of_element_located((By.CLASS_NAME, 'owl-item'))
+)
+soup = BeautifulSoup(driver.page_source, 'html.parser')
+soup = soup.select('.owl-stage-outer .owl-stage .owl-item img')
+
+for i in range(3):
+    new_adlink = adlinks(imgURL=soup[i]['src'])
+    session.add(new_adlink)
 
 # 변경사항 커밋
 session.commit()
